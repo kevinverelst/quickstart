@@ -24,14 +24,14 @@ export class CommentService {
 
   addComment(body: Object): Observable<Comment[]> {
     let bodyString = JSON.stringify(body);
-    return this.http.put(this.commentsUrl, bodyString, this.options)
+    return this.http.post(this.commentsUrl, bodyString, this.options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
   }
 
   updateComment(body: Object): Observable<Comment[]> {
     let bodyString = JSON.stringify(body);
-    return this.http.post(`${this.commentsUrl}/${body['id']}`, bodyString, this.options)
+    return this.http.put(`${this.commentsUrl}/${body['id']}`, bodyString, this.options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
   }
